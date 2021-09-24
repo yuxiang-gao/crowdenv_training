@@ -1,3 +1,114 @@
+# CrowdEnv-v0:
+#   policy: 'MlpPolicy'
+#   n_envs: 8
+#   n_steps: 64 # 128
+#   n_epochs: 4
+#   batch_size: 256
+#   gamma: 0.9 #
+#   gae_lambda: 0.9 #
+#   n_timesteps: !!float 2e7
+#   learning_rate: lin_5e-3 # lin_2.5e-4
+#   clip_range: lin_0.3 # lin_0.1
+#   vf_coef: 0.03 # 0.5
+#   ent_coef: 0.0 # 0.01
+#   policy_kwargs: 'dict(
+#       features_extractor_class=PairwiseAttentionFeaturesExtractor,
+#       features_extractor_kwargs=dict(dims=dict(
+#         mlp1_dims=[256, 128, 0],
+#         mlp2_dims=[128, 64], 
+#         attention_dims=[128, 128, 1])),
+#       activation_fn=nn.Tanh, 
+#       ortho_init=False,
+#       net_arch=[dict(pi=[256, 256], vf=[256, 256])],)'
+
+CrowdEnv-v0:
+  policy: 'MlpPolicy'
+  n_envs: 8
+  n_steps: 128
+  n_epochs: 4
+  batch_size: 256
+  n_timesteps: !!float 2e7
+  learning_rate: lin_2.5e-4
+  clip_range: lin_0.1
+  vf_coef: 0.5
+  ent_coef: 0.01
+  policy_kwargs: 'dict(
+      features_extractor_class=PairwiseAttentionFeaturesExtractor,
+      features_extractor_kwargs=dict(dims=dict(
+        mlp1_dims=[256, 128, 0],
+        mlp2_dims=[128, 64], 
+        attention_dims=[128, 128, 1])),
+      activation_fn=nn.ReLU, 
+      net_arch=[dict(pi=[256, 256], vf=[256, 256])],)'
+
+CrowdEnv-NoRoles-v0:
+  policy: 'MlpPolicy'
+  n_envs: 8
+  n_steps: 128
+  n_epochs: 4
+  batch_size: 256
+  n_timesteps: !!float 2e7
+  learning_rate: lin_2.5e-4
+  clip_range: lin_0.1
+  vf_coef: 0.5
+  ent_coef: 0.01
+  policy_kwargs: 'dict(
+      features_extractor_class=PairwiseAttentionFeaturesExtractor,
+      features_extractor_kwargs=dict(dims=dict(
+        mlp1_dims=[256, 128, 0],
+        mlp2_dims=[128, 64], 
+        attention_dims=[128, 128, 1])),
+      activation_fn=nn.ReLU, 
+      net_arch=[dict(pi=[256, 256], vf=[256, 256])],)'
+
+CrowdEnv-Continuous-v0:
+  policy: 'MlpPolicy'
+  n_envs: 8
+  n_steps: 128
+  n_epochs: 4
+  batch_size: 256
+  n_timesteps: !!float 2e7
+  learning_rate: lin_2.5e-4
+  clip_range: lin_0.1
+  vf_coef: 0.5
+  ent_coef: 0.01
+  use_sde: True
+  sde_sample_freq: 4
+  policy_kwargs: 'dict(
+      log_std_init=-2,
+      ortho_init=False,
+      features_extractor_class=PairwiseAttentionFeaturesExtractor,
+      features_extractor_kwargs=dict(dims=dict(
+        mlp1_dims=[256, 128, 0],
+        mlp2_dims=[128, 64], 
+        attention_dims=[128, 128, 1])),
+      activation_fn=nn.ReLU, 
+      net_arch=[dict(pi=[256, 256], vf=[256, 256])],)'
+
+CrowdEnv-Continuous-NoRoles-v0:
+  policy: 'MlpPolicy'
+  n_envs: 8
+  n_steps: 128
+  n_epochs: 4
+  batch_size: 256
+  n_timesteps: !!float 2e7
+  learning_rate: lin_2.5e-4
+  clip_range: lin_0.1
+  vf_coef: 0.5
+  ent_coef: 0.01
+  use_sde: True
+  sde_sample_freq: 4
+  policy_kwargs: 'dict(
+      log_std_init=-2,
+      ortho_init=False,
+      features_extractor_class=PairwiseAttentionFeaturesExtractor,
+      features_extractor_kwargs=dict(dims=dict(
+        mlp1_dims=[256, 128, 0],
+        mlp2_dims=[128, 64], 
+        attention_dims=[128, 128, 1])),
+      activation_fn=nn.ReLU, 
+      net_arch=[dict(pi=[256, 256], vf=[256, 256])],)'
+
 atari:
   env_wrapper:
     - stable_baselines3.common.atari_wrappers.AtariWrapper
